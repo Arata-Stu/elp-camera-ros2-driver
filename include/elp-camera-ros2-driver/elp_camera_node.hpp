@@ -3,8 +3,10 @@
 
 #include <camera_info_manager/camera_info_manager.hpp>
 #include <cv_bridge/cv_bridge.h>
+#include <geometry_msgs/msg/transform_stamped.hpp>
 #include <image_transport/image_transport.hpp>
 #include <rclcpp/rclcpp.hpp>
+#include <tf2_ros/static_transform_broadcaster.h>
 
 namespace elp_camera {
 
@@ -26,6 +28,12 @@ private:
   rclcpp::TimerBase::SharedPtr timer_;
 
   std::string frame_id_;
+  std::string left_frame_id_;
+  std::string right_frame_id_;
+  bool publish_frame_alias_tf_;
+  std::string left_frame_alias_parent_;
+  std::string right_frame_alias_parent_;
+  std::shared_ptr<tf2_ros::StaticTransformBroadcaster> static_tf_broadcaster_;
 };
 
 } // namespace elp_camera
