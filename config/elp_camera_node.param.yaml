@@ -1,9 +1,9 @@
 /**:
   ros__parameters:
     device_id: 0
-    width: 2560
-    height: 720
-    fps: 30.0
+    width: 640
+    height: 240
+    fps: 120.0
     pixel_format: "MJPG"
     frame_id: "camera_link"
     left_frame_id: "camera_infra1_optical_frame"
