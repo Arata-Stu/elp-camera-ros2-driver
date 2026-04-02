@@ -2,6 +2,7 @@
 #define ELP_CAMERA_CORE_HPP_
 
 #include <opencv2/opencv.hpp>
+#include <string>
 
 namespace elp_camera {
 
@@ -10,7 +11,8 @@ public:
   ElpCameraCore();
   ~ElpCameraCore();
 
-  bool setup(int device_id, int width, int height, double fps);
+  bool setup(int device_id, int width, int height, double fps,
+             const std::string &pixel_format);
   void release();
   bool capture(cv::Mat &left_frame, cv::Mat &right_frame);
 

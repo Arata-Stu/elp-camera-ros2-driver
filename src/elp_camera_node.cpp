@@ -10,6 +10,7 @@ ElpCameraNode::ElpCameraNode(const rclcpp::NodeOptions &options)
   this->declare_parameter("width", 2560);
   this->declare_parameter("height", 720);
   this->declare_parameter("fps", 30.0);
+  this->declare_parameter("pixel_format", "MJPG");
   this->declare_parameter("frame_id", "camera_link");
   this->declare_parameter("camera_info_url_left", "");
   this->declare_parameter("camera_info_url_right", "");
@@ -19,6 +20,7 @@ ElpCameraNode::ElpCameraNode(const rclcpp::NodeOptions &options)
   int width = this->get_parameter("width").as_int();
   int height = this->get_parameter("height").as_int();
   double fps = this->get_parameter("fps").as_double();
+  std::string pixel_format = this->get_parameter("pixel_format").as_string();
   frame_id_ = this->get_parameter("frame_id").as_string();
   std::string camera_info_url_left =
       this->get_parameter("camera_info_url_left").as_string();
@@ -27,7 +29,7 @@ ElpCameraNode::ElpCameraNode(const rclcpp::NodeOptions &options)
 
   // Initialize Core
   core_ = new ElpCameraCore();
-  if (!core_->setup(device_id, width, height, fps)) {
+  if (!core_->setup(device_id, width, height, fps, pixel_format)) {
     RCLCPP_ERROR(this->get_logger(), "Failed to setup ELP Camera Core");
     rclcpp::shutdown();
     return;
@@ -53,8 +55,9 @@ ElpCameraNode::ElpCameraNode(const rclcpp::NodeOptions &options)
       period, std::bind(&ElpCameraNode::timer_callback, this));
 
   RCLCPP_INFO(this->get_logger(),
-              "ELP Camera Node Initialized (Device: %d, %dx%d @ %.1f fps)",
-              device_id, width, height, fps);
+              "ELP Camera Node Initialized (Device: %d, %dx%d @ %.1f fps, "
+              "Pixel Format: %s)",
+              device_id, width, height, fps, pixel_format.c_str());
 }
 
 ElpCameraNode::~ElpCameraNode() {
