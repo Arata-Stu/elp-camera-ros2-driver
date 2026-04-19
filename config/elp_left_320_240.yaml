@@ -1,6 +1,6 @@
 image_width: 320
 image_height: 240
-camera_name: elp_left
+camera_name: left_camera
 camera_matrix:
   rows: 3
   cols: 3
