@@ -15,6 +15,6 @@
     camera_info_url_right: "package://elp-camera-ros2-driver/config/elp_right.yaml"
 
 ## camera settings
-# resolution: 3200x1200 (16:9), 2560x720 (16:9), 1600x600 (4:3), 1280x480 (16:9), 640x240 (4:3)
+# resolution: 3200x1200 (4:3), 2560x720 (16:9), 1600x600 (4:3), 1280x480 (16:9), 640x240 (4:3)
 # fps: 10, 15, 20, 25, 30, 60, 120(3200x1200と2560x720は非対応)
 # pixel_format: "MJPG" or "YUYV"
